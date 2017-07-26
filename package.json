@@ -1,0 +1,19 @@
+{
+  "name": "ikazuti",
+  "version": "1.0.0",
+  "description": "electron based server",
+  "main": "main.js",
+  "scripts": {
+    "test": "test-poi"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/kor-coeo/Ikazuti.git"
+  },
+  "author": "coeo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kor-coeo/Ikazuti/issues"
+  },
+  "homepage": "https://github.com/kor-coeo/Ikazuti#readme"
+}
