@@ -6,9 +6,13 @@
 #include <string>
 #include <cmath>
 #include <sstream>
+#include <vector>
 
+using std::vector;
 using std::deque;
 using std::stringstream;
+
+static const short FOODS = 4;
 /****************************************/
 /****************************************/
 struct Coor{
@@ -19,14 +23,17 @@ class SnakeGame{
 private:
   short row;
   short col;
-  struct Coor food;
-  deque<struct Coor> snakeBody;
-  bool isInSnakeBody(struct Coor &coor);
-  void newFood();
+  short players;
+  struct Coor food[FOODS];
+  vector< deque<struct Coor> > snakeBody;
+  bool isInFood(const struct Coor &coor);
+  bool isInSnakeBody(const struct Coor &coor,const short &snake);
+  void newFood(short foo);
 public:
   stringstream GameInfoSS;
-  short dir;
-  void GameInit();
+  vector<short> dir;
+  void GameInit(const short &plys);
+  void SnakeAction(const short &snake);
   void GameAction();
   void setGameInfoSS();
 };
