@@ -75,14 +75,14 @@ void Client::delivClose(){
 short Server::delivWking(const char sendBf[],char recvBf[],const int &cli){
   send(connSKID[cli],sendBf,MaxBuffSize,0);
   recv(connSKID[cli],recvBf,MaxBuffSize,0);
-  cout << "send " << sendBf << endl;
-  cout << "recv " << recvBf << endl;
+  cout << "delivWking send " << sendBf << endl;
+  cout << "delivWking recv " << recvBf << endl;
   return 0;
 }
 short Client::delivWking(const char sendBf[],char recvBf[],const int &cli=-1){
   send(socketID,sendBf,MaxBuffSize,0);
   recv(socketID,recvBf,MaxBuffSize,0);
-  cout << "send " << sendBf << endl;
-  cout << "recv " << recvBf << endl;
+  cout << "delivWking send " << sendBf << endl;
+  cout << "delivWking recv " << recvBf << endl;
   return 0;
 }
