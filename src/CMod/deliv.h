@@ -7,7 +7,9 @@
 #include <sys/socket.h>
 #include <sstream>
 #include <unistd.h>
+#include <vector>
 using std::stringstream;
+using std::vector;
 // Server Listen Queue
 static const short LisQ = 16;
 // MaxBuffSize
@@ -24,20 +26,20 @@ public:
   void delivInit(const short &port,const char *ip);
   virtual void delivReady() = 0;
   virtual void delivClose() = 0;
-  virtual short delivWking(const char sendBf[],char recvBf[]) = 0;
+  virtual short delivWking(const char sendBf[],char recvBf[],const int &cli) = 0;
 };
 
 class Server: public Deliv{
 private:
-  int connSKID;
+  vector<int> connSKID;
   struct sockaddr_in client_sockaddr;
   bool delivBind();
   bool delivListen();
-  bool delivAccept();
 public:
+  bool delivAccept();
   void delivReady();
   void delivClose();
-  short delivWking(const char sendBf[],char recvBf[]);
+  short delivWking(const char sendBf[],char recvBf[],const int &cli);
 };
 
 class Client: public Deliv{
@@ -46,7 +48,7 @@ private:
 public:
   void delivReady();
   void delivClose();
-  short delivWking(const char sendBf[],char recvBf[]);
+  short delivWking(const char sendBf[],char recvBf[],const int &cli);
 };
 /*********************************************************/
 #endif

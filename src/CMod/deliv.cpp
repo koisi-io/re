@@ -43,15 +43,16 @@ bool Server::delivAccept(){
   socklen_t length = sizeof(client_sockaddr);
   int foo = accept(socketID, (struct sockaddr*)&client_sockaddr, &length);
   if(foo>=0){
-    connSKID = foo;return true;
+    connSKID.push_back(foo);return true;
   }else{return false;};
 }
 void Server::delivReady(){
-  if( delivBind() && delivListen() && delivAccept() );
+  if( delivBind() && delivListen());
   else {perror("Server: Failed to Ready >_ ");exit(101);}
 }
 void Server::delivClose(){
-  close(connSKID);
+  for(int i=0;i<connSKID.size();++i)
+    close(connSKID[i]);
   close(socketID);
 }
 /*********************************************************/
@@ -71,14 +72,14 @@ void Client::delivClose(){
 }
 /*********************************************************/
 /*******     Wking     *******/
-short Server::delivWking(const char sendBf[],char recvBf[]){
-  send(connSKID,sendBf,MaxBuffSize,0);
-  recv(connSKID,recvBf,MaxBuffSize,0);
+short Server::delivWking(const char sendBf[],char recvBf[],const int &cli){
+  send(connSKID[cli],sendBf,MaxBuffSize,0);
+  recv(connSKID[cli],recvBf,MaxBuffSize,0);
   cout << "send " << sendBf << endl;
   cout << "recv " << recvBf << endl;
   return 0;
 }
-short Client::delivWking(const char sendBf[],char recvBf[]){
+short Client::delivWking(const char sendBf[],char recvBf[],const int &cli=-1){
   send(socketID,sendBf,MaxBuffSize,0);
   recv(socketID,recvBf,MaxBuffSize,0);
   cout << "send " << sendBf << endl;
